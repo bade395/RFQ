@@ -1,18 +1,19 @@
-const folderIds = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24];
 let foldersData = [];
 let currentCategory = 'الكل';
 let activeUrl = '';
 
+// دالة جلب البيانات من ملف JSON الواحد المجمع
 async function loadAllData() {
     try {
-        const promises = folderIds.map(id => fetch(`data/folder_${id}.json`).then(res => res.json()));
-        foldersData = await Promise.all(promises);
+        const response = await fetch('data/folders-data.json');
+        foldersData = await response.json();
         renderGrid();
     } catch (err) {
-        console.error("Error loading modular folder files:", err);
+        console.error("خطأ في تحميل بيانات المجلدات:", err);
     }
 }
 
+// دالة رسم بطاقات المجلدات في الشاشة
 function renderGrid() {
     const grid = document.getElementById('foldersGrid');
     grid.innerHTML = '';
@@ -48,6 +49,7 @@ function renderGrid() {
     });
 }
 
+// دالة فتح نافذة المعاينة التفصيلية للمجلد
 function openExplorer(folder) {
     activeUrl = folder.url;
     document.getElementById('modalFolderName').innerText = folder.name;
@@ -97,6 +99,7 @@ function openExplorer(folder) {
     document.getElementById('explorerModal').classList.add('active');
 }
 
+// غلق النافذة المنبثقة
 function closeModal() {
     document.getElementById('explorerModal').classList.remove('active');
 }
@@ -106,6 +109,7 @@ function copyModalUrl() {
     closeModal();
 }
 
+// نسخ الرابط الحافظة
 function copyFolderUrl(url, btn = null) {
     const textarea = document.createElement("textarea");
     textarea.value = url;
@@ -133,6 +137,7 @@ function copyFolderUrl(url, btn = null) {
     }
 }
 
+// رسالة التنبيه العائمة
 function showToast() {
     const toast = document.getElementById('toastAlert');
     toast.classList.add('show');
@@ -141,6 +146,7 @@ function showToast() {
     }, 2500);
 }
 
+// الفلترة حسب الفئة
 function setCategory(cat, btn) {
     currentCategory = cat;
     document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
@@ -148,6 +154,7 @@ function setCategory(cat, btn) {
     filterFolders();
 }
 
+// محرك البحث الفوري
 function filterFolders() {
     const query = document.getElementById('searchInput').value.toLowerCase();
     const cards = document.querySelectorAll('.folder-card');
@@ -163,4 +170,5 @@ function filterFolders() {
     });
 }
 
+// بدء التشغيل وجلب البيانات عند تحميل الصفحة
 loadAllData();
