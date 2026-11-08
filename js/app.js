@@ -42,7 +42,7 @@ async function loadAllData() {
         if (subtitle) subtitle.textContent = `قراءة مباشرة من Google Drive • آخر تحديث: ${stamp}`;
     } catch (error) {
         console.error('خطأ في قراءة Google Drive:', error);
-        $('foldersGrid').innerHTML = `<p class="empty-state">${escapeHtml(error.message)}<br>تأكد من إعداد GOOGLE_DRIVE_API_KEY في Vercel ومن صلاحية عرض المجلدات.</p>`;
+        $('foldersGrid').innerHTML = `<p class="empty-state">${escapeHtml(error.message)}<br>تأكد من إعداد GOOGLE_APPS_SCRIPT_URL و GOOGLE_APPS_SCRIPT_TOKEN في Vercel، ومن تفويض Google Apps Script وصلاحية قراءة المجلدات.</p>`;
         if ($('totalFoldersStat')) $('totalFoldersStat').textContent = '—';
         if ($('totalItemsStat')) $('totalItemsStat').textContent = '—';
     }
