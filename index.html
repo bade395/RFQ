@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>منظومة إدارة المجلدات المعمارية - هيكل منفصل</title>
+    <title>منظومة إدارة المجلدات المعمارية الاحترافية</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -12,32 +12,32 @@
     <div class="wrapper">
         <div class="hero-header">
             <div class="badge-pill">
-                <span>🧩</span> هيكل برمجي منفصل (Modular Architecture)
+                <span>⚡</span> منظومة إدارة المجلدات المعمارية الاحترافية
             </div>
             <h1>لوحة التحكم واستعراض المجلدات الاحترافية</h1>
-            <p>كل مجلد له ملف مستقل بذاته، لتتمكن من التعديل والتطوير بحرية تامة دون التأثير على باقي الأجزاء</p>
+            <p>إدارة الـ 24 مجلداً، معاينة الملفات والمجلدات الفرعية الداخلية بدقة وحساب الأعداد الفعليّة تلقائياً</p>
         </div>
 
         <div class="stats-bar">
             <div class="stat-card">
                 <div class="stat-icon">📁</div>
                 <div class="stat-info">
-                    <h4>24 ملفاً</h4>
-                    <p>مجلدات مستقلة (JSON)</p>
+                    <h4 id="totalFoldersStat">0</h4>
+                    <p>إجمالي المجلدات الرئيسية</p>
                 </div>
             </div>
             <div class="stat-card">
                 <div class="stat-icon">📄</div>
                 <div class="stat-info">
-                    <h4>72+ ملفاً</h4>
-                    <p>مستندات ومخططات داخلية</p>
+                    <h4 id="totalItemsStat">0</h4>
+                    <p>إجمالي الملفات والمجلدات الفرعية</p>
                 </div>
             </div>
             <div class="stat-card">
-                <div class="stat-icon">⚡</div>
+                <div class="stat-icon">🚀</div>
                 <div class="stat-info">
-                    <h4>آمن وسهل التعديل</h4>
-                    <p>فصل التصميم عن البيانات</p>
+                    <h4>معاينة فورية</h4>
+                    <p>بدون مغادرة المنظومة</p>
                 </div>
             </div>
         </div>
@@ -73,7 +73,7 @@
             </div>
             <div class="explorer-body">
                 <div style="font-size: 14px; font-weight: 600; color: #94a3b8; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
-                    <span>📂</span> الملفات والمستندات الداخلية المتاحة في المجلد:
+                    <span>📂</span> الملفات والمجلدات الداخلية المتاحة في المجلد:
                 </div>
                 <div id="modalFilesList"></div>
             </div>
