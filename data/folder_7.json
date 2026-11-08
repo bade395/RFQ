@@ -1,0 +1,12 @@
+{
+    "id": "7",
+    "name": "07- Carpet Tiles",
+    "url": "https://drive.google.com/drive/folders/1fry9JXlgTneq8BNKp2TEfwsBeYFfNMdc",
+    "category": "الأرضيات والتكسيات",
+    "icon": "🧵",
+    "items": [
+        {"name": "Carpet_Tiles_Catalog.pdf", "type": "file", "ext": "pdf"},
+        {"name": "Fire_Rating_Certificates.pdf", "type": "file", "ext": "pdf"},
+        {"name": "Color_Options.pdf", "type": "file", "ext": "pdf"}
+    ]
+}
