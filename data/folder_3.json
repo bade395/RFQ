@@ -1,0 +1,14 @@
+{
+    "id": "3",
+    "name": "03- Gypsum Board and Assemblies",
+    "url": "https://drive.google.com/drive/folders/1LsGAfd3QEg4tVkFiPKd2nYiCn74VPRth",
+    "category": "أسقف وحوائط الجبس",
+    "icon": "🏗️",
+    "items": [
+        {"name": "Gypsum_Partition_Details.pdf", "type": "file", "ext": "pdf"},
+        {"name": "Ceiling_Suspension_System.pdf", "type": "file", "ext": "pdf"},
+        {"name": "Material_Compliance.pdf", "type": "file", "ext": "pdf"},
+        {"name": "Subfolder- Fire-Rated Assemblies", "type": "folder"},
+        {"name": "Subfolder- Acoustic Details", "type": "folder"}
+    ]
+}
