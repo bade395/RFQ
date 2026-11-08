@@ -1,0 +1,166 @@
+const folderIds = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24];
+let foldersData = [];
+let currentCategory = 'الكل';
+let activeUrl = '';
+
+async function loadAllData() {
+    try {
+        const promises = folderIds.map(id => fetch(`data/folder_${id}.json`).then(res => res.json()));
+        foldersData = await Promise.all(promises);
+        renderGrid();
+    } catch (err) {
+        console.error("Error loading modular folder files:", err);
+    }
+}
+
+function renderGrid() {
+    const grid = document.getElementById('foldersGrid');
+    grid.innerHTML = '';
+
+    foldersData.forEach(folder => {
+        const totalItemsCount = folder.items ? folder.items.length : 0;
+        const searchKeywords = folder.items ? folder.items.map(i => i.name).join(' ') : '';
+        const card = document.createElement('div');
+        card.className = 'folder-card';
+        card.setAttribute('data-category', folder.category);
+        card.setAttribute('data-search', (folder.name + ' ' + searchKeywords).toLowerCase());
+
+        card.innerHTML = `
+            <div class="card-top">
+                <div class="folder-emoji">${folder.icon}</div>
+                <span class="category-tag">${folder.category}</span>
+            </div>
+            <div class="card-body">
+                <h3 class="folder-name">${folder.name}</h3>
+                <div class="files-preview-count">
+                    <span>📂</span> إجمالي العناصر الفعلية: <strong>${totalItemsCount}</strong> (ملفات ومجلدات فرعية)
+                </div>
+            </div>
+            <div class="card-actions">
+                <button class="btn btn-inspect" onclick='openExplorer(${JSON.stringify(folder)})'>
+                    👁️ استعراض كافة الملفات والمجلدات الداخلية (${totalItemsCount})
+                </button>
+                <a href="${folder.url}" target="_blank" class="btn btn-open">🌐 فتح الدرايف</a>
+                <button class="btn btn-copy" onclick="copyFolderUrl('${folder.url}', this)">📋 نسخ</button>
+            </div>
+        `;
+        grid.appendChild(card);
+    });
+}
+
+function openExplorer(folder) {
+    activeUrl = folder.url;
+    document.getElementById('modalFolderName').innerText = folder.name;
+    document.getElementById('modalFolderUrl').innerText = folder.url;
+    document.getElementById('modalDriveLink').href = folder.url;
+
+    const filesListDiv = document.getElementById('modalFilesList');
+    filesListDiv.innerHTML = '';
+
+    if (!folder.items || folder.items.length === 0) {
+        filesListDiv.innerHTML = '<p style="color: #94a3b8; text-align: center; padding: 20px;">لا توجد عناصر مسجلة داخل هذا المجلد حالياً.</p>';
+        document.getElementById('explorerModal').classList.add('active');
+        return;
+    }
+
+    folder.items.forEach(item => {
+        let icon = '📄';
+        let badgeText = 'ملف';
+        let badgeColor = 'rgba(56, 189, 248, 0.1)';
+        let badgeTextColor = '#38bdf8';
+
+        if (item.type === 'folder') {
+            icon = '📁';
+            badgeText = 'مجلد فرعي';
+            badgeColor = 'rgba(245, 158, 11, 0.12)';
+            badgeTextColor = '#f59e0b';
+        } else {
+            let ext = (item.ext || '').toLowerCase();
+            if (ext === 'dwg') { icon = '📐'; badgeText = 'DWG'; }
+            else if (ext === 'xlsx') { icon = '📊'; badgeText = 'EXCEL'; }
+            else if (ext === 'pdf') { icon = '📑'; badgeText = 'PDF'; }
+            else { badgeText = ext.toUpperCase() || 'FILE'; }
+        }
+
+        const fileItem = document.createElement('div');
+        fileItem.className = 'file-item';
+        fileItem.innerHTML = `
+            <div style="display: flex; align-items: center; gap: 12px;">
+                <span style="font-size: 20px;">${icon}</span>
+                <span style="font-size: 14px; font-weight: 600; color: #f8fafc;">${item.name}</span>
+            </div>
+            <span style="font-size: 11px; padding: 4px 10px; border-radius: 6px; background: ${badgeColor}; color: ${badgeTextColor}; font-weight: 700;">${badgeText}</span>
+        `;
+        filesListDiv.appendChild(fileItem);
+    });
+
+    document.getElementById('explorerModal').classList.add('active');
+}
+
+function closeModal() {
+    document.getElementById('explorerModal').classList.remove('active');
+}
+
+function copyModalUrl() {
+    copyFolderUrl(activeUrl);
+    closeModal();
+}
+
+function copyFolderUrl(url, btn = null) {
+    const textarea = document.createElement("textarea");
+    textarea.value = url;
+    textarea.style.position = "fixed";
+    textarea.style.opacity = "0";
+    document.body.appendChild(textarea);
+    textarea.select();
+
+    try {
+        document.execCommand("copy");
+        if (btn) {
+            const origText = btn.innerText;
+            btn.innerText = "✔ تم";
+            btn.classList.add("copied");
+            setTimeout(() => {
+                btn.innerText = origText;
+                btn.classList.remove("copied");
+            }, 2000);
+        }
+        showToast();
+    } catch (err) {
+        alert("تعذر النسخ التلقائي.");
+    } finally {
+        document.body.removeChild(textarea);
+    }
+}
+
+function showToast() {
+    const toast = document.getElementById('toastAlert');
+    toast.classList.add('show');
+    setTimeout(() => {
+        toast.classList.remove('show');
+    }, 2500);
+}
+
+function setCategory(cat, btn) {
+    currentCategory = cat;
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    filterFolders();
+}
+
+function filterFolders() {
+    const query = document.getElementById('searchInput').value.toLowerCase();
+    const cards = document.querySelectorAll('.folder-card');
+
+    cards.forEach(card => {
+        const searchData = card.getAttribute('data-search');
+        const category = card.getAttribute('data-category');
+
+        const matchesSearch = searchData.includes(query);
+        const matchesCat = (currentCategory === 'الكل') || (category === currentCategory);
+
+        card.style.display = (matchesSearch && matchesCat) ? "flex" : "none";
+    });
+}
+
+loadAllData();
