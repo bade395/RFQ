@@ -16,74 +16,35 @@ function escapeHtml(value = '') {
 }
 
 async function loadAllData() {
-    // Render the published catalogue first. Google Drive is an enhancement,
-    // not a dependency for showing the saved data.
     try {
-        const metaResponse = await fetch('data/folders-data.json', { cache: 'no-store' });
-        if (!metaResponse.ok) throw new Error('تعذر تحميل بيانات المجلدات المحفوظة');
-        const metadata = await metaResponse.json();
-        if (!Array.isArray(metadata)) throw new Error('ملف بيانات المجلدات غير صالح');
-
-        foldersData = metadata.map(folder => ({
-            ...folder,
-            items: Array.isArray(folder.items) ? folder.items : []
-        }));
-        updateTotalStats();
-        renderGrid();
-        updateCategoryCounts();
-    } catch (error) {
-        console.error('تعذر تحميل البيانات المحفوظة:', error);
-        $('foldersGrid').innerHTML = '<p class="empty-state">تعذر تحميل ملف البيانات المحفوظة. يرجى تحديث الصفحة أو مراجعة ملفات النشر.</p>';
-        return;
-    }
-
-    // Try to refresh the catalogue from Google Drive without hiding saved data.
-    try {
-        const liveResponse = await fetch('/api/drive', {
-            cache: 'no-store',
-            signal: AbortSignal.timeout(20000)
-        });
+        const [metaResponse, liveResponse] = await Promise.all([
+            fetch('data/folders-data.json', { cache: 'no-store' }),
+            fetch('/api/drive', { cache: 'no-store' })
+        ]);
+        if (!metaResponse.ok) throw new Error('تعذر تحميل أسماء المجلدات');
         if (!liveResponse.ok) {
             const error = await liveResponse.json().catch(() => ({}));
-            throw new Error(error.error || `تعذر تحديث Google Drive (HTTP ${liveResponse.status})`);
+            throw new Error(error.error || `تعذر الاتصال بـ Google Drive (HTTP ${liveResponse.status})`);
         }
-
-        const live = await liveResponse.json();
-        if (!Array.isArray(live.folders)) throw new Error('استجابة Google Drive غير صحيحة');
-
-        const byDriveId = new Map(live.folders.filter(item => item.rootId).map(item => [String(item.rootId), item]));
-        const byName = new Map(live.folders.filter(item => item.name).map(item => [String(item.name).trim().toLowerCase(), item]));
-
-        foldersData = foldersData.map((folder, index) => {
-            const match = (() => {
-                const driveId = String(folder.url || '').match(/folders\/([^/?]+)/)?.[1];
-                return (driveId && byDriveId.get(driveId)) ||
-                    byName.get(String(folder.name || '').trim().toLowerCase()) ||
-                    live.folders[index];
-            })();
-            if (!match) return folder;
-
-            const files = (match.files || []).map(file => ({ ...file, type: 'file' }));
-            const subfolders = (match.folders || []).map(subfolder => ({ ...subfolder, type: 'folder' }));
-            return {
-                ...folder,
-                url: match.url || folder.url,
-                items: [...files, ...subfolders],
-                liveFileCount: files.length,
-                liveFolderCount: subfolders.length
-            };
+        const [metadata, live] = await Promise.all([metaResponse.json(), liveResponse.json()]);
+        if (!Array.isArray(metadata) || !Array.isArray(live.folders)) throw new Error('استجابة Google Drive غير صحيحة');
+        foldersData = metadata.map((folder, index) => {
+            const actual = live.folders[index] || { files: [], folders: [] };
+            const files = (actual.files || []).map(file => ({ ...file, type: 'file' }));
+            const subfolders = (actual.folders || []).map(subfolder => ({ ...subfolder, type: 'folder' }));
+            return { ...folder, items: [...files, ...subfolders], liveFileCount: files.length, liveFolderCount: subfolders.length };
         });
-
         updateTotalStats();
         renderGrid();
         updateCategoryCounts();
         const stamp = live.scannedAt ? new Date(live.scannedAt).toLocaleString('ar-EG') : '';
         const subtitle = document.querySelector('.hero-header p');
-        if (subtitle) subtitle.textContent = `بيانات محفوظة مع تحديث مباشر من Google Drive • آخر تحديث: ${stamp}`;
+        if (subtitle) subtitle.textContent = `قراءة مباشرة من Google Drive • آخر تحديث: ${stamp}`;
     } catch (error) {
-        console.warn('تعذر تحديث Google Drive؛ يستمر عرض البيانات المحفوظة:', error);
-        const subtitle = document.querySelector('.hero-header p');
-        if (subtitle) subtitle.textContent = 'يتم عرض البيانات المحفوظة — تعذر الاتصال المباشر بـ Google Drive حالياً';
+        console.error('خطأ في قراءة Google Drive:', error);
+        $('foldersGrid').innerHTML = `<p class="empty-state">${escapeHtml(error.message)}<br>تأكد من إعداد GOOGLE_APPS_SCRIPT_URL و GOOGLE_APPS_SCRIPT_TOKEN في Vercel، ومن تفويض Google Apps Script وصلاحية قراءة المجلدات.</p>`;
+        if ($('totalFoldersStat')) $('totalFoldersStat').textContent = '—';
+        if ($('totalItemsStat')) $('totalItemsStat').textContent = '—';
     }
 }
 
