@@ -2,23 +2,23 @@ let foldersData = [];
 let currentCategory = 'الكل';
 let activeUrl = '';
 
-// 1. دالة جلب البيانات من ملف JSON وحساب الإحصائيات الفعليه ديناميكياً
+// 1. دالة جلب البيانات من ملف JSON الواحد وحساب الإحصائيات الفعليّة ديناميكياً
 async function loadAllData() {
     try {
         const response = await fetch('data/folders-data.json');
         foldersData = await response.json();
         
-        // تحديث الإحصائيات الإجمالية في أعلى الصفحة تلقائياً
+        // تحديث الإحصائيات الإجمالية أعلى الصفحة تلقائياً
         updateTotalStats();
         
-        // عرض المجلدات
+        // رسم بطاقات المجلدات
         renderGrid();
     } catch (err) {
         console.error("خطأ في تحميل بيانات المجلدات:", err);
     }
 }
 
-// دالة حساب وتحديث الإحصائيات الفعليه في أعلى الواجهة
+// دالة حساب وتحديث الإحصائيات الإجمالية بدقة
 function updateTotalStats() {
     const totalFoldersCount = foldersData.length;
     let totalItemsCount = 0;
@@ -29,12 +29,11 @@ function updateTotalStats() {
         }
     });
 
-    // تحديث الأرقام الفعليه في كروت الإحصائيات أعلى الواجهة
-    const statCards = document.querySelectorAll('.stat-info h4');
-    if (statCards.length >= 2) {
-        statCards[0].innerText = `${totalFoldersCount} مجلداً`;
-        statCards[1].innerText = `${totalItemsCount} عنصراً فعلياً`;
-    }
+    const foldersStatEl = document.getElementById('totalFoldersStat');
+    const itemsStatEl = document.getElementById('totalItemsStat');
+
+    if (foldersStatEl) foldersStatEl.innerText = `${totalFoldersCount} مجلداً`;
+    if (itemsStatEl) itemsStatEl.innerText = `${totalItemsCount} عنصراً`;
 }
 
 // 2. دالة رسم بطاقات المجلدات وحساب العدد الفعلي الخاص بكل مجلد
@@ -44,8 +43,6 @@ function renderGrid() {
 
     foldersData.forEach(folder => {
         const totalItemsCount = folder.items ? folder.items.length : 0;
-        
-        // تجميع أسماء العناصر للبحث اللحظي
         const searchKeywords = folder.items ? folder.items.map(i => i.name).join(' ') : '';
         
         const card = document.createElement('div');
@@ -92,7 +89,6 @@ function openExplorer(folder) {
         return;
     }
 
-    // عرض جميع العناصر بلا استثناء
     folder.items.forEach(item => {
         let icon = '📄';
         let badgeText = 'ملف';
