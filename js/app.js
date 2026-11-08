@@ -2,25 +2,52 @@ let foldersData = [];
 let currentCategory = 'الكل';
 let activeUrl = '';
 
-// دالة جلب البيانات من ملف JSON الواحد المجمع
+// 1. دالة جلب البيانات من ملف JSON وحساب الإحصائيات الفعليه ديناميكياً
 async function loadAllData() {
     try {
         const response = await fetch('data/folders-data.json');
         foldersData = await response.json();
+        
+        // تحديث الإحصائيات الإجمالية في أعلى الصفحة تلقائياً
+        updateTotalStats();
+        
+        // عرض المجلدات
         renderGrid();
     } catch (err) {
         console.error("خطأ في تحميل بيانات المجلدات:", err);
     }
 }
 
-// دالة رسم بطاقات المجلدات في الشاشة
+// دالة حساب وتحديث الإحصائيات الفعليه في أعلى الواجهة
+function updateTotalStats() {
+    const totalFoldersCount = foldersData.length;
+    let totalItemsCount = 0;
+
+    foldersData.forEach(folder => {
+        if (folder.items && Array.isArray(folder.items)) {
+            totalItemsCount += folder.items.length;
+        }
+    });
+
+    // تحديث الأرقام الفعليه في كروت الإحصائيات أعلى الواجهة
+    const statCards = document.querySelectorAll('.stat-info h4');
+    if (statCards.length >= 2) {
+        statCards[0].innerText = `${totalFoldersCount} مجلداً`;
+        statCards[1].innerText = `${totalItemsCount} عنصراً فعلياً`;
+    }
+}
+
+// 2. دالة رسم بطاقات المجلدات وحساب العدد الفعلي الخاص بكل مجلد
 function renderGrid() {
     const grid = document.getElementById('foldersGrid');
     grid.innerHTML = '';
 
     foldersData.forEach(folder => {
         const totalItemsCount = folder.items ? folder.items.length : 0;
+        
+        // تجميع أسماء العناصر للبحث اللحظي
         const searchKeywords = folder.items ? folder.items.map(i => i.name).join(' ') : '';
+        
         const card = document.createElement('div');
         card.className = 'folder-card';
         card.setAttribute('data-category', folder.category);
@@ -28,18 +55,18 @@ function renderGrid() {
 
         card.innerHTML = `
             <div class="card-top">
-                <div class="folder-emoji">${folder.icon}</div>
+                <div class="folder-emoji">${folder.icon || '📁'}</div>
                 <span class="category-tag">${folder.category}</span>
             </div>
             <div class="card-body">
                 <h3 class="folder-name">${folder.name}</h3>
                 <div class="files-preview-count">
-                    <span>📂</span> إجمالي العناصر الفعلية: <strong>${totalItemsCount}</strong> (ملفات ومجلدات فرعية)
+                    <span>📂</span> العدد الفعلي المتاح: <strong>${totalItemsCount}</strong> عنصر (ملفات ومجلدات فرعية)
                 </div>
             </div>
             <div class="card-actions">
-                <button class="btn btn-inspect" onclick='openExplorer(${JSON.stringify(folder)})'>
-                    👁️ استعراض كافة الملفات والمجلدات الداخلية (${totalItemsCount})
+                <button class="btn btn-inspect" onclick='openExplorer(${JSON.stringify(folder).replace(/'/g, "&apos;")})'>
+                    👁️ استعراض كافة المحتويات بالكامل (${totalItemsCount})
                 </button>
                 <a href="${folder.url}" target="_blank" class="btn btn-open">🌐 فتح الدرايف</a>
                 <button class="btn btn-copy" onclick="copyFolderUrl('${folder.url}', this)">📋 نسخ</button>
@@ -49,7 +76,7 @@ function renderGrid() {
     });
 }
 
-// دالة فتح نافذة المعاينة التفصيلية للمجلد
+// 3. دالة فتح نافذة المعاينة وعرض جميع العناصر بدون استثناء
 function openExplorer(folder) {
     activeUrl = folder.url;
     document.getElementById('modalFolderName').innerText = folder.name;
@@ -65,6 +92,7 @@ function openExplorer(folder) {
         return;
     }
 
+    // عرض جميع العناصر بلا استثناء
     folder.items.forEach(item => {
         let icon = '📄';
         let badgeText = 'ملف';
@@ -77,9 +105,9 @@ function openExplorer(folder) {
             badgeColor = 'rgba(245, 158, 11, 0.12)';
             badgeTextColor = '#f59e0b';
         } else {
-            let ext = (item.ext || '').toLowerCase();
+            let ext = (item.ext || item.name.split('.').pop() || '').toLowerCase();
             if (ext === 'dwg') { icon = '📐'; badgeText = 'DWG'; }
-            else if (ext === 'xlsx') { icon = '📊'; badgeText = 'EXCEL'; }
+            else if (ext === 'xlsx' || ext === 'xls') { icon = '📊'; badgeText = 'EXCEL'; }
             else if (ext === 'pdf') { icon = '📑'; badgeText = 'PDF'; }
             else { badgeText = ext.toUpperCase() || 'FILE'; }
         }
@@ -109,7 +137,7 @@ function copyModalUrl() {
     closeModal();
 }
 
-// نسخ الرابط الحافظة
+// نسخ الرابط إلى الحافظة
 function copyFolderUrl(url, btn = null) {
     const textarea = document.createElement("textarea");
     textarea.value = url;
@@ -137,7 +165,7 @@ function copyFolderUrl(url, btn = null) {
     }
 }
 
-// رسالة التنبيه العائمة
+// إظهار تنبيه النسخ
 function showToast() {
     const toast = document.getElementById('toastAlert');
     toast.classList.add('show');
@@ -154,7 +182,7 @@ function setCategory(cat, btn) {
     filterFolders();
 }
 
-// محرك البحث الفوري
+// البحث اللحظي في أسماء المجلدات والملفات
 function filterFolders() {
     const query = document.getElementById('searchInput').value.toLowerCase();
     const cards = document.querySelectorAll('.folder-card');
@@ -170,5 +198,5 @@ function filterFolders() {
     });
 }
 
-// بدء التشغيل وجلب البيانات عند تحميل الصفحة
+// تشغيل جلب البيانات عند فتح الصفحة
 loadAllData();
