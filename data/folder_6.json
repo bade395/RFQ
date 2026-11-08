@@ -1,0 +1,13 @@
+{
+    "id": "6",
+    "name": "06- Resilient & Vinyl Flooring",
+    "url": "https://drive.google.com/drive/folders/1Pfo92zZ1kixyDvm1SZ8eHpkahYy9mc-c",
+    "category": "الأرضيات والتكسيات",
+    "icon": "📐",
+    "items": [
+        {"name": "Vinyl_Flooring_Samples.pdf", "type": "file", "ext": "pdf"},
+        {"name": "Adhesive_Specs.pdf", "type": "file", "ext": "pdf"},
+        {"name": "Flooring_Layout_Plan.dwg", "type": "file", "ext": "dwg"},
+        {"name": "Subfolder- ESD Flooring", "type": "folder"}
+    ]
+}
