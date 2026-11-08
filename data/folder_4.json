@@ -1,0 +1,13 @@
+{
+    "id": "4",
+    "name": "04- Acoustical (Ceiling & Wall Panels)",
+    "url": "https://drive.google.com/drive/folders/1gZp0gI8Gto1LEATkE-l9TGpnuUr-QeVA",
+    "category": "عزل الصوت والصوتيات",
+    "icon": "🔇",
+    "items": [
+        {"name": "Acoustic_Test_Reports.pdf", "type": "file", "ext": "pdf"},
+        {"name": "NRC_Ratings_Summary.xlsx", "type": "file", "ext": "xlsx"},
+        {"name": "Wall_Panels_Layout.dwg", "type": "file", "ext": "dwg"},
+        {"name": "Subfolder- Sound Absorption Data", "type": "folder"}
+    ]
+}
