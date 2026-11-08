@@ -1,0 +1,309 @@
+[
+    {
+        "id": "1",
+        "name": "01- Glass Partition & Curtain Wall System",
+        "url": "https://drive.google.com/drive/folders/17LjDnWXaZkUBKThaSLnuqPFKbvc_QyDQ",
+        "category": "الألومنيوم والزجاج",
+        "icon": "🪟",
+        "items": [
+            {"name": "Glass_Technical_Specs.pdf", "type": "file", "ext": "pdf"},
+            {"name": "Curtain_Wall_Details.dwg", "type": "file", "ext": "dwg"},
+            {"name": "Shop_Drawings_Rev2.pdf", "type": "file", "ext": "pdf"},
+            {"name": "Approved_Materials_List.xlsx", "type": "file", "ext": "xlsx"},
+            {"name": "Subfolder- Profiles & Extrusions", "type": "folder"},
+            {"name": "Subfolder- Hardware & Gaskets", "type": "folder"}
+        ]
+    },
+    {
+        "id": "2",
+        "name": "02- Door Hardwares",
+        "url": "https://drive.google.com/drive/folders/1ALAbvjN7PHuLINh3z-yPPGhVQPIOTyQ_",
+        "category": "الأبواب والإكسسوارات",
+        "icon": "🔑",
+        "items": [
+            {"name": "Locks_Hinges_Catalog.pdf", "type": "file", "ext": "pdf"},
+            {"name": "Door_Hardware_Schedule.xlsx", "type": "file", "ext": "xlsx"},
+            {"name": "Handles_Specification.pdf", "type": "file", "ext": "pdf"},
+            {"name": "Subfolder- Panic Devices", "type": "folder"}
+        ]
+    },
+    {
+        "id": "3",
+        "name": "03- Gypsum Board and Assemblies",
+        "url": "https://drive.google.com/drive/folders/1LsGAfd3QEg4tVkFiPKd2nYiCn74VPRth",
+        "category": "أسقف وحوائط الجبس",
+        "icon": "🏗️",
+        "items": [
+            {"name": "Gypsum_Partition_Details.pdf", "type": "file", "ext": "pdf"},
+            {"name": "Ceiling_Suspension_System.pdf", "type": "file", "ext": "pdf"},
+            {"name": "Material_Compliance.pdf", "type": "file", "ext": "pdf"},
+            {"name": "Subfolder- Fire-Rated Assemblies", "type": "folder"},
+            {"name": "Subfolder- Acoustic Details", "type": "folder"}
+        ]
+    },
+    {
+        "id": "4",
+        "name": "04- Acoustical (Ceiling & Wall Panels)",
+        "url": "https://drive.google.com/drive/folders/1gZp0gI8Gto1LEATkE-l9TGpnuUr-QeVA",
+        "category": "عزل الصوت والصوتيات",
+        "icon": "🔇",
+        "items": [
+            {"name": "Acoustic_Test_Reports.pdf", "type": "file", "ext": "pdf"},
+            {"name": "NRC_Ratings_Summary.xlsx", "type": "file", "ext": "xlsx"},
+            {"name": "Wall_Panels_Layout.dwg", "type": "file", "ext": "dwg"},
+            {"name": "Subfolder- Sound Absorption Data", "type": "folder"}
+        ]
+    },
+    {
+        "id": "5",
+        "name": "05- Metal Ceiling Tiles",
+        "url": "https://drive.google.com/drive/folders/10BPp0CnufY3NAbsj6f2Mxy-VBqETWtwQ",
+        "category": "أسقف وحوائط الجبس",
+        "icon": "⚙️",
+        "items": [
+            {"name": "Metal_Tiles_Brochure.pdf", "type": "file", "ext": "pdf"},
+            {"name": "Installation_Guide.pdf", "type": "file", "ext": "pdf"},
+            {"name": "Perforation_Patterns.pdf", "type": "file", "ext": "pdf"}
+        ]
+    },
+    {
+        "id": "6",
+        "name": "06- Resilient & Vinyl Flooring",
+        "url": "https://drive.google.com/drive/folders/1Pfo92zZ1kixyDvm1SZ8eHpkahYy9mc-c",
+        "category": "الأرضيات والتكسيات",
+        "icon": "📐",
+        "items": [
+            {"name": "Vinyl_Flooring_Samples.pdf", "type": "file", "ext": "pdf"},
+            {"name": "Adhesive_Specs.pdf", "type": "file", "ext": "pdf"},
+            {"name": "Flooring_Layout_Plan.dwg", "type": "file", "ext": "dwg"},
+            {"name": "Subfolder- ESD Flooring", "type": "folder"}
+        ]
+    },
+    {
+        "id": "7",
+        "name": "07- Carpet Tiles",
+        "url": "https://drive.google.com/drive/folders/1fry9JXlgTneq8BNKp2TEfwsBeYFfNMdc",
+        "category": "الأرضيات والتكسيات",
+        "icon": "🧵",
+        "items": [
+            {"name": "Carpet_Tiles_Catalog.pdf", "type": "file", "ext": "pdf"},
+            {"name": "Fire_Rating_Certificates.pdf", "type": "file", "ext": "pdf"},
+            {"name": "Color_Options.pdf", "type": "file", "ext": "pdf"}
+        ]
+    },
+    {
+        "id": "8",
+        "name": "08- Painting",
+        "url": "https://drive.google.com/drive/folders/1dSuY8acrhXLtotaVc_FIJ7GKRRKqXi4U",
+        "category": "الدهانات والتشطيبات",
+        "icon": "🎨",
+        "items": [
+            {"name": "Paint_Color_Palette.pdf", "type": "file", "ext": "pdf"},
+            {"name": "Primer_Technical_Data.pdf", "type": "file", "ext": "pdf"},
+            {"name": "Application_Methodology.pdf", "type": "file", "ext": "pdf"},
+            {"name": "Subfolder- Epoxy Coatings", "type": "folder"}
+        ]
+    },
+    {
+        "id": "9",
+        "name": "09- Furniture",
+        "url": "https://drive.google.com/drive/folders/1AYRqNnEzHyDOAnG_g8D2_XqVYNri2lzr",
+        "category": "الأثاث والديكور",
+        "icon": "🛋️",
+        "items": [
+            {"name": "Office_Furniture_Layout.dwg", "type": "file", "ext": "dwg"},
+            {"name": "Workstations_Catalog.pdf", "type": "file", "ext": "pdf"},
+            {"name": "Executive_Desks_Specs.pdf", "type": "file", "ext": "pdf"},
+            {"name": "Subfolder- Auditorium Seating", "type": "folder"},
+            {"name": "Subfolder- Reception Counters", "type": "folder"}
+        ]
+    },
+    {
+        "id": "10",
+        "name": "10- Metal Fabrications",
+        "url": "https://drive.google.com/drive/folders/1QMuMrh2msj3oXyMTirtN-BGyfrMBzZjH",
+        "category": "الأعمال المعدنية",
+        "icon": "🔨",
+        "items": [
+            {"name": "Handrails_Staircases.dwg", "type": "file", "ext": "dwg"},
+            {"name": "Structural_Steel_Notes.pdf", "type": "file", "ext": "pdf"},
+            {"name": "Welding_Certifications.pdf", "type": "file", "ext": "pdf"}
+        ]
+    },
+    {
+        "id": "11",
+        "name": "11- Specialty Doors",
+        "url": "https://drive.google.com/drive/folders/1eMhqJtw_dCdlO3jvX-fM7fDmFInYA9Bk",
+        "category": "الأبواب والإكسسوارات",
+        "icon": "🚪",
+        "items": [
+            {"name": "Fire_Rated_Doors_Specs.pdf", "type": "file", "ext": "pdf"},
+            {"name": "Automatic_Doors_Manual.pdf", "type": "file", "ext": "pdf"},
+            {"name": "Acoustic_Doors.pdf", "type": "file", "ext": "pdf"},
+            {"name": "Subfolder- X-Ray Shielded Doors", "type": "folder"}
+        ]
+    },
+    {
+        "id": "12",
+        "name": "12- Ceramic & Porcelain",
+        "url": "https://drive.google.com/drive/folders/1iPrxKVy5is0Eo2PY5B-ep2tN50hg9nCD",
+        "category": "الأرضيات والتكسيات",
+        "icon": "🧱",
+        "items": [
+            {"name": "Ceramic_Tiles_Catalog.pdf", "type": "file", "ext": "pdf"},
+            {"name": "Porcelain_Technical_Sheet.pdf", "type": "file", "ext": "pdf"},
+            {"name": "Slip_Resistance_Test.pdf", "type": "file", "ext": "pdf"},
+            {"name": "Subfolder- Exterior Cladding Tiles", "type": "folder"}
+        ]
+    },
+    {
+        "id": "13",
+        "name": "13- Signages",
+        "url": "https://drive.google.com/drive/folders/1i7BCIIzbti9i2IxdiXaUTnDb2J-IjZjC",
+        "category": "الأثاث والديكور",
+        "icon": "🪧",
+        "items": [
+            {"name": "Wayfinding_Signage_Plan.pdf", "type": "file", "ext": "pdf"},
+            {"name": "LED_Signs_Specs.pdf", "type": "file", "ext": "pdf"},
+            {"name": "Emergency_Exits.dwg", "type": "file", "ext": "dwg"}
+        ]
+    },
+    {
+        "id": "14",
+        "name": "14- Roller Blinds",
+        "url": "https://drive.google.com/drive/folders/1ibVLcRsHzH1o6EaCQUa4x9Rmc66n-ruB",
+        "category": "الأثاث والديكور",
+        "icon": "🪟",
+        "items": [
+            {"name": "Motorized_Blinds_Spec.pdf", "type": "file", "ext": "pdf"},
+            {"name": "Fabric_Opacity_Chart.pdf", "type": "file", "ext": "pdf"},
+            {"name": "Control_Systems.pdf", "type": "file", "ext": "pdf"}
+        ]
+    },
+    {
+        "id": "15",
+        "name": "15- Landscaping",
+        "url": "https://drive.google.com/drive/folders/1YPVzb0VxYlCAb3Vi6ru5BRHM9enaTd7R",
+        "category": "المساحات الخارجية",
+        "icon": "🌳",
+        "items": [
+            {"name": "Hardscape_Layout.dwg", "type": "file", "ext": "dwg"},
+            {"name": "Irrigation_System.pdf", "type": "file", "ext": "pdf"},
+            {"name": "Plant_Schedule.xlsx", "type": "file", "ext": "xlsx"},
+            {"name": "Subfolder- Outdoor Furniture", "type": "folder"},
+            {"name": "Subfolder- Lighting Poles", "type": "folder"}
+        ]
+    },
+    {
+        "id": "16",
+        "name": "16- Mosaic Tiles",
+        "url": "https://drive.google.com/drive/folders/1OCRORuQG_qIq5CUWUVndIFyeYXD_l1Us",
+        "category": "الأرضيات والتكسيات",
+        "icon": "🟪",
+        "items": [
+            {"name": "Mosaic_Patterns.pdf", "type": "file", "ext": "pdf"},
+            {"name": "Pool_Tiles_Specs.pdf", "type": "file", "ext": "pdf"},
+            {"name": "Grout_Selection.pdf", "type": "file", "ext": "pdf"}
+        ]
+    },
+    {
+        "id": "17",
+        "name": "17- Marble and Granite & Natural Stone",
+        "url": "https://drive.google.com/drive/folders/1vqxWYwGwCae43Ig8xsgGTyhEHe4YzdmZ",
+        "category": "الأرضيات والتكسيات",
+        "icon": "🏛️",
+        "items": [
+            {"name": "Marble_Slabs_Catalog.pdf", "type": "file", "ext": "pdf"},
+            {"name": "Granite_Cladding_Details.dwg", "type": "file", "ext": "dwg"},
+            {"name": "Stone_Testing_Reports.pdf", "type": "file", "ext": "pdf"},
+            {"name": "Subfolder- Book-matched Marbles", "type": "folder"}
+        ]
+    },
+    {
+        "id": "18",
+        "name": "18- Waterproofing Material",
+        "url": "https://drive.google.com/drive/folders/1pXfxNFiQSBmFq7ByPgVHa4uTLZZrLrj7",
+        "category": "الدهانات والتشطيبات",
+        "icon": "💧",
+        "items": [
+            {"name": "Membrane_Specs.pdf", "type": "file", "ext": "pdf"},
+            {"name": "Roof_Waterproofing_Details.dwg", "type": "file", "ext": "dwg"},
+            {"name": "Warranty_Certificate.pdf", "type": "file", "ext": "pdf"}
+        ]
+    },
+    {
+        "id": "19",
+        "name": "19- Plaster",
+        "url": "https://drive.google.com/drive/folders/1vIYu--v5bs1the_skkOSQx1C9dE5H47a",
+        "category": "الدهانات والتشطيبات",
+        "icon": "🧱",
+        "items": [
+            {"name": "Plaster_Application_Guide.pdf", "type": "file", "ext": "pdf"},
+            {"name": "Mix_Ratio_Specs.pdf", "type": "file", "ext": "pdf"},
+            {"name": "Surface_Preparation.pdf", "type": "file", "ext": "pdf"}
+        ]
+    },
+    {
+        "id": "20",
+        "name": "20- Wood Cladding & Parquet Flooring",
+        "url": "https://drive.google.com/drive/folders/1Jj1wp-1F4THytT8aCASjqrpbjtzZAHWB",
+        "category": "الأرضيات والتكسيات",
+        "icon": "🪵",
+        "items": [
+            {"name": "Parquet_Catalog.pdf", "type": "file", "ext": "pdf"},
+            {"name": "Wood_Cladding_Details.dwg", "type": "file", "ext": "dwg"},
+            {"name": "Maintenance_Guide.pdf", "type": "file", "ext": "pdf"},
+            {"name": "Subfolder- Decking", "type": "folder"}
+        ]
+    },
+    {
+        "id": "21",
+        "name": "21- Wallpaper Wallcovering",
+        "url": "https://drive.google.com/drive/folders/1cSuyVow_CToNdTRXirE_9w3sJqpvZw7V",
+        "category": "الدهانات والتشطيبات",
+        "icon": "🖼️",
+        "items": [
+            {"name": "Wallpaper_Patterns.pdf", "type": "file", "ext": "pdf"},
+            {"name": "Adhesive_Guidelines.pdf", "type": "file", "ext": "pdf"},
+            {"name": "Fire_Resistance_Cert.pdf", "type": "file", "ext": "pdf"}
+        ]
+    },
+    {
+        "id": "22",
+        "name": "22- Micro-topping Neo-cement",
+        "url": "https://drive.google.com/drive/folders/14EO6a_hWXNhdoqItcfAZBRuXGU9gik0t",
+        "category": "الدهانات والتشطيبات",
+        "icon": "🏗️",
+        "items": [
+            {"name": "Neo_Cement_Catalog.pdf", "type": "file", "ext": "pdf"},
+            {"name": "Application_Steps.pdf", "type": "file", "ext": "pdf"},
+            {"name": "Color_Swatches.pdf", "type": "file", "ext": "pdf"}
+        ]
+    },
+    {
+        "id": "23",
+        "name": "23- GRC",
+        "url": "https://drive.google.com/drive/folders/1kw5MegzKTh6-a9JcTwobu5E8XOKVFUPj",
+        "category": "الأعمال المعدنية",
+        "icon": "🏛️",
+        "items": [
+            {"name": "GRC_Details_Elevations.dwg", "type": "file", "ext": "dwg"},
+            {"name": "Structural_Calculations.pdf", "type": "file", "ext": "pdf"},
+            {"name": "Fixing_Details.pdf", "type": "file", "ext": "pdf"},
+            {"name": "Subfolder- 3D Cornices", "type": "folder"}
+        ]
+    },
+    {
+        "id": "24",
+        "name": "24- Doors (Metal & Wood)",
+        "url": "https://drive.google.com/drive/folders/1TcPx8c_iwBkqNHhsv71mKA8ct0w_qqqj",
+        "category": "الأبواب والإكسسوارات",
+        "icon": "🚪",
+        "items": [
+            {"name": "Wooden_Doors_Schedule.xlsx", "type": "file", "ext": "xlsx"},
+            {"name": "Metal_Frames_Details.dwg", "type": "file", "ext": "dwg"},
+            {"name": "Hardware_List.pdf", "type": "file", "ext": "pdf"},
+            {"name": "Subfolder- Special Cavity Sliders", "type": "folder"}
+        ]
+    }
+]
