@@ -1,0 +1,13 @@
+{
+    "id": "2",
+    "name": "02- Door Hardwares",
+    "url": "https://drive.google.com/drive/folders/1ALAbvjN7PHuLINh3z-yPPGhVQPIOTyQ_",
+    "category": "الأبواب والإكسسوارات",
+    "icon": "🔑",
+    "items": [
+        {"name": "Locks_Hinges_Catalog.pdf", "type": "file", "ext": "pdf"},
+        {"name": "Door_Hardware_Schedule.xlsx", "type": "file", "ext": "xlsx"},
+        {"name": "Handles_Specification.pdf", "type": "file", "ext": "pdf"},
+        {"name": "Subfolder- Panic Devices", "type": "folder"}
+    ]
+}
