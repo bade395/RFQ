@@ -17,17 +17,34 @@ function escapeHtml(value = '') {
 
 async function loadAllData() {
     try {
-        const response = await fetch('data/folders-data.json', { cache: 'no-store' });
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
-        const data = await response.json();
-        if (!Array.isArray(data)) throw new Error('صيغة بيانات المجلدات غير صحيحة');
-        foldersData = data;
+        const [metaResponse, liveResponse] = await Promise.all([
+            fetch('data/folders-data.json', { cache: 'no-store' }),
+            fetch('/api/drive', { cache: 'no-store' })
+        ]);
+        if (!metaResponse.ok) throw new Error('تعذر تحميل أسماء المجلدات');
+        if (!liveResponse.ok) {
+            const error = await liveResponse.json().catch(() => ({}));
+            throw new Error(error.error || `تعذر الاتصال بـ Google Drive (HTTP ${liveResponse.status})`);
+        }
+        const [metadata, live] = await Promise.all([metaResponse.json(), liveResponse.json()]);
+        if (!Array.isArray(metadata) || !Array.isArray(live.folders)) throw new Error('استجابة Google Drive غير صحيحة');
+        foldersData = metadata.map((folder, index) => {
+            const actual = live.folders[index] || { files: [], folders: [] };
+            const files = (actual.files || []).map(file => ({ ...file, type: 'file' }));
+            const subfolders = (actual.folders || []).map(subfolder => ({ ...subfolder, type: 'folder' }));
+            return { ...folder, items: [...files, ...subfolders], liveFileCount: files.length, liveFolderCount: subfolders.length };
+        });
         updateTotalStats();
         renderGrid();
         updateCategoryCounts();
+        const stamp = live.scannedAt ? new Date(live.scannedAt).toLocaleString('ar-EG') : '';
+        const subtitle = document.querySelector('.hero-header p');
+        if (subtitle) subtitle.textContent = `قراءة مباشرة من Google Drive • آخر تحديث: ${stamp}`;
     } catch (error) {
-        console.error('خطأ في تحميل بيانات المجلدات:', error);
-        $('foldersGrid').innerHTML = '<p class="empty-state">تعذر تحميل البيانات. حدّث الصفحة وحاول مرة أخرى.</p>';
+        console.error('خطأ في قراءة Google Drive:', error);
+        $('foldersGrid').innerHTML = `<p class="empty-state">${escapeHtml(error.message)}<br>تأكد من إعداد GOOGLE_DRIVE_API_KEY في Vercel ومن صلاحية عرض المجلدات.</p>`;
+        if ($('totalFoldersStat')) $('totalFoldersStat').textContent = '—';
+        if ($('totalItemsStat')) $('totalItemsStat').textContent = '—';
     }
 }
 
